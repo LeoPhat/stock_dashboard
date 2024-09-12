@@ -1,0 +1,9 @@
+name: Chay cac cau lenh trong shell
+on: [push]
+
+jobs:
+  chay_cac_cau_lenh:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Xuat ra thong diep
+        run: echo "Hello Gurus! Day la workflows CICD dau tien!!!"
