@@ -1,9 +1,11 @@
-name: Chay cac cau lenh trong shell
-on: [push]
-
+name: Example workflow for Node using Snyk
+on: push
 jobs:
-  chay_cac_cau_lenh:
+  security:
     runs-on: ubuntu-latest
     steps:
-      - name: Xuat ra thong diep
-        run: echo "Hello Gurus! Day la workflows CICD dau tien!!!"
+      - uses: actions/checkout@master
+      - name: Run Snyk to check for vulnerabilities
+        uses: snyk/actions/node@master
+        env:
+          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
