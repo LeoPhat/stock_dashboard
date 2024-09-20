@@ -1,6 +1,26 @@
 name: Example workflow for Node using Snyk
 on: push
 jobs:
+  sonaqube:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 16
+          cache: npm
+      - run: npm install
+      - name: Run SonarQube scan on SonarCloud
+        uses: sonarsource/sonarcloud-github-action@v3.0.0
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          args: >
+            -Dsonar.organization=LeoPhat
+            -Dsonar.projectKey=leophat
   security:
     runs-on: ubuntu-latest
     steps:
